@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/sha512"
 	"encoding/json"
-	"fmt"
 	c "go-rest-api/api/config"
 	m "go-rest-api/api/models"
 	u "go-rest-api/api/utils"
@@ -18,7 +17,6 @@ import (
 )
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("IN POST")
 	var user m.User
 	h := sha512.New()
 
@@ -38,10 +36,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL.Path)
 	s := strings.Split(r.URL.Path, "/")[2]
 
-	fmt.Println("IN GET USERS")
 	var user m.User
 	collection := c.Client.Database("golangrestapi").Collection("users")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
